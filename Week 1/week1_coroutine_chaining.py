@@ -43,4 +43,5 @@ async def fetch_posts(user):
 if __name__ == "__main__": #entry point to the program
     random.seed(444) #we start with a seed number so random numbers are always same
     asyncio.run(main()) #creates event loop and starts the main coroutines
+    
 
