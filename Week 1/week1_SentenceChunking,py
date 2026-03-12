@@ -1,0 +1,39 @@
+##splits the text into sentences,counts token in each sentence,group sentences together until max limit token,creates overlapping chunks
+
+
+
+def split_sentences_by_spacy(text,max_tokens,overlap=0,model="en_core_web_sm"):
+    
+    nlp=spacy.load(model) #loads spacy nlp model
+    doc=nlp(text) #processes the input text and creates a document object
+    sentences=[ sent.text for sent in doc.sents] #doc.sents gives all sentences recognizd by spacy
+    tokens_lengths=[count_tokens(sent) for sent in sentences] #count tokens per sentence
+
+    chunks=[]
+    start_idx=0
+
+    while start_idx<len(sentences):
+        current_chunk=[]
+        current_token_count=0
+
+        for idx in range(start_idx,len(sentences)):
+
+            if current_token_count+tokens_lengths[idx]>max_tokens:
+                break
+            current_chunk.append(sentences[idx])
+            current_token_count+=tokens_lengths[idx]
+
+        
+        chunks.append("".join(current_chunk))
+
+        if overlap>=len(current_chunk):
+            start_idx+=1
+        else:
+            start_idx+=len(current_chunk)-overlap
+
+    
+    return chunks
+
+
+
+

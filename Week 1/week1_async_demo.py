@@ -1,7 +1,7 @@
 
 #Summary
 #asyncio provides a framework to run single threaded concurrent codes using coroutines,event loops and non-blocking I/O ops
-#there is no thread management no asyncio is faster on concurrent tasks
+#there is no thread management so asyncio is faster on concurrent tasks
 #asyncio is useful for blcking requests like API calls, DB calls,networks requests and file access
 
 
